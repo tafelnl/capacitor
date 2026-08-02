@@ -780,6 +780,8 @@ export interface PluginsConfig {
      * This shifts the responsibility from Capacitor to your own code to handle the insets.
      * Be aware that this might result in a visually broken UI if your native app code and the content loaded into the webview do not correctly handle safe area insets.
      *
+     * When set to `native` or `css`, the plugin also enables edge-to-edge mode on the activity window (via `EdgeToEdge.enable`), so the window matches what the insets handling assumes on every Android version, not only on Android 15+ where the system enforces it.
+     *
      * @default "css"
      */
     insetsHandling?: 'native' | 'css' | 'disable';

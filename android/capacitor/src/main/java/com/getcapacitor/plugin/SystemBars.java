@@ -8,6 +8,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
+import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -138,6 +139,14 @@ public class SystemBars extends Plugin {
         }
 
         warnAboutUnsupportedConfigurationValues();
+
+        if (!INSETS_HANDLING_DISABLE.equals(insetsHandling)) {
+            // The insets listener assumes an edge-to-edge window on every Android
+            // version, not only on API 35+ where the system enforces it. Align older
+            // versions with that assumption, so the fallback padding is not applied
+            // on top of a window the system is already fitting and resizing.
+            EdgeToEdge.enable(getActivity());
+        }
 
         initWindowInsetsListener();
 
